@@ -1,0 +1,20 @@
+:root {
+    --bg-color: #111827;
+    --card-bg: #1F2937;
+    --text-color: #F9FAFB;
+    --text-muted: #A1A1AA;
+    --accent: #A78BFA;
+    --accent-hover: #8B5CF6;
+    --border: #374151;
+    --transition: 0.3s ease;
+}
+
+[data-theme="light"] {
+    --bg-color: #F7F7FB;
+    --card-bg: #FFFFFF;
+    --text-color: #202033;
+    --text-muted: #6B7280;
+    --accent: #7C3AED;
+    --accent-hover: #6D28D9;
+    --border: #E5E1F2;
+}

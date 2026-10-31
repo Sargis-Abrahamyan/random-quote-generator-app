@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Generator App</title>
+    <script src="https://unpkg.com/lucide@0.460.0"></script>
+    <script>
+        let theme = "dark";
+
+        const savedTheme = JSON.parse(localStorage.getItem("theme"));
+        if (savedTheme === "light" || savedTheme === "dark") theme = savedTheme;
+        document.documentElement.dataset.theme = theme;
+    </script>
+    <link rel="stylesheet" href="./styles/main.css" />
+</head>
+
+<body>
+    <header class="header container">
+        <h1 class="header__title">Quote Generator</h1>
+
+        <div class="header_actions">
+            <button class="open-modal" id="openCustomQuoteModal" type="button">
+                Add Your Own Quote
+            </button>
+            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">
+                <span id="themeIcon">
+                    <i data-lucide="moon" aria-hidden="true"></i>
+                </span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="section__wrapper">
+            <section class="categories" aria-labelledby="categoriesTitle">
+                <h2 class="section__title" id="categoriesTitle">
+                    Categories
+                </h2>
+                <ul class="categories__list" id="categoriesList"></ul>
+            </section>
+            <section class="quotes " aria-labelledby="quotesTitle">
+                <h2 class="section__title" id="quotesTitle">
+                    Your Quote
+                </h2>
+
+                <div class="quote-card">
+                    <span class="quote-card__author" id="quoteAuthor"></span>
+                    <p class="quote-card__content" id="quoteContent">Click Generate Quote to get started.</p>
+                </div>
+
+                <div class="quotes__actions">
+                    <button class="quotes__generate" id="generateQuote" type="button">
+                        Generate Quote
+                    </button>
+
+                    <button class="quotes__copy" id="copyQuote" type="button">
+                        <i data-lucide="copy"></i>
+                    </button>
+                </div>
+
+                <div class="share" role="group" aria-label="Share this quote">
+                    <span class="share__label">Share</span>
+
+                    <a class="share__link" data-share="x" href="#" target="_blank" rel="noopener noreferrer"
+                        aria-label="Share on X" aria-disabled="true" title="X">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                    <a class="share__link" data-share="facebook" href="#" target="_blank" rel="noopener noreferrer"
+                        aria-label="Share on Facebook" aria-disabled="true" title="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                    <a class="share__link" data-share="whatsapp" href="#" target="_blank" rel="noopener noreferrer"
+                        aria-label="Share on WhatsApp" aria-disabled="true" title="WhatsApp">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+                            <path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.5-1.5-2-1-1 .8c-1-.4-1.8-1.2-2.2-2.2l.8-1-1-2z" />
+                        </svg>
+                    </a>
+                    <a class="share__link" data-share="telegram" href="#" target="_blank" rel="noopener noreferrer"
+                        aria-label="Share on Telegram" aria-disabled="true" title="Telegram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path
+                                d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+                            <path d="m21.854 2.147-10.94 10.939" />
+                        </svg>
+                    </a>
+                    <a class="share__link" data-share="linkedin" href="#" target="_blank" rel="noopener noreferrer"
+                        aria-label="Share on LinkedIn" aria-disabled="true" title="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect width="4" height="12" x="2" y="9" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+
+                    <button class="share__link share__native" id="nativeShare" type="button"
+                        aria-label="More sharing options" title="More" disabled>
+                        <i data-lucide="share-2" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <dialog class="custom-quotes__modal" id="customQuoteModal">
+            <div class="custom-quotes" aria-labelledby="customQuotesTitle">
+                <div class="custom-quotes__header">
+                    <h2 class="custom-quotes__title" id="customQuotesTitle">
+                        Add Your Own Quote
+                    </h2>
+
+                    <button class="custom-quotes__close" id="closeCustomQuoteModal" type="button"
+                        aria-label="Close modal">
+                        &times;
+                    </button>
+                </div>
+
+                <form class="custom-quotes__form" id="customQuoteForm">
+                    <div class="custom-quotes__field">
+                        <label class="custom-quotes__label" for="customQuote">
+                            Quote
+                        </label>
+
+                        <textarea class="custom-quotes__input" id="customQuote" name="quote"
+                            placeholder="Enter your quote..." rows="4" required></textarea>
+                    </div>
+
+                    <div class="custom-quotes__field">
+                        <label class="custom-quotes__label" for="customQuoteAuthor">
+                            Author
+                        </label>
+
+                        <input class="custom-quotes__input" id="customQuoteAuthor" name="author" type="text"
+                            placeholder="Enter author name..." />
+                    </div>
+
+                    <div class="custom-quotes__field">
+                        <span class="custom-quotes__label" id="categoryLabel">
+                            Category
+                        </span>
+
+                        <div class="custom-dropdown" id="categoryDropdown">
+                            <input type="hidden" id="customQuoteCategory" name="category" value="" />
+                            <button class="custom-dropdown__trigger" id="categoryTrigger" type="button"
+                                aria-labelledby="categoryLabel categorySelected" aria-expanded="false"
+                                aria-controls="categoryMenu">
+                                <span id="categorySelected">Select category</span>
+                                <span class="custom-dropdown__arrow" aria-hidden="true"></span>
+                            </button>
+
+                            <ul class="custom-dropdown__menu" id="categoryMenu" aria-labelledby="categoryLabel">
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="custom-quotes__submit" type="submit">
+                        Add Quote
+                    </button>
+                </form>
+            </div>
+        </dialog>
+    </main>
+
+    <footer class="footer">
+        <p>Quotes powered by the
+            <a href="https://github.com/musheer360/QuoteSlate" target="_blank" rel="noopener noreferrer">QuoteSlate
+                API</a>
+        </p>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+
+</html>

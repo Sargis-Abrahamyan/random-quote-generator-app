@@ -1,0 +1,66 @@
+.categories {
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 12px;
+}
+
+.categories__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.categories__list .categories__item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.categories__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.categories__checkbox {
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    background-color: var(--card-bg);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.categories__checkbox:checked {
+    border-color: var(--accent);
+    background-color: var(--accent);
+}
+
+.categories__checkbox:checked::after {
+    content: "";
+    width: 5px;
+    height: 9px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.categories__checkbox:hover {
+    border-color: var(--accent);
+}
+
+.categories__checkbox:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}

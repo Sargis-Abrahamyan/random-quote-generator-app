@@ -1,0 +1,195 @@
+.open-modal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 24px;
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.2);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.open-modal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(124, 58, 237, 0.3);
+}
+
+.open-modal:active {
+    transform: scale(0.97);
+}
+
+.custom-quotes__modal {
+    width: min(92%, 460px);
+    max-height: 90dvh;
+    margin: auto;
+    position: fixed;
+    inset: 0;
+    padding: 0;
+    overflow: visible;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    color: var(--text-color);
+    background: var(--card-bg);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        overlay 0.25s allow-discrete,
+        display 0.25s allow-discrete;
+}
+
+.custom-quotes {
+    padding: 24px;
+    overflow: visible;
+}
+
+.custom-quotes__modal[open] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+@starting-style {
+    .custom-quotes__modal[open] {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+}
+
+.custom-quotes__modal::backdrop {
+    background: rgba(5, 8, 20, 0);
+    backdrop-filter: blur(0);
+    transition:
+        background 0.25s ease,
+        backdrop-filter 0.25s ease,
+        overlay 0.25s allow-discrete,
+        display 0.25s allow-discrete;
+}
+
+.custom-quotes__modal[open]::backdrop {
+    background: rgba(5, 8, 20, 0.75);
+    backdrop-filter: blur(8px);
+}
+
+@starting-style {
+    .custom-quotes__modal[open]::backdrop {
+        background: rgba(5, 8, 20, 0);
+        backdrop-filter: blur(0);
+    }
+}
+
+.custom-quotes {
+    padding: 24px;
+}
+
+.custom-quotes__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.custom-quotes__header .section__title {
+    flex: 1;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--accent);
+    font-size: 1.2rem;
+}
+
+.custom-quotes__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.custom-quotes__close:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.open-modal:focus-visible,
+.custom-quotes__close:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+    .custom-quotes__modal {
+        width: min(90%, 420px);
+        max-height: 85dvh;
+        border-radius: 18px;
+    }
+
+    .custom-quotes {
+        padding: 20px;
+    }
+
+    .custom-quotes__header {
+        margin-bottom: 16px;
+    }
+
+    .custom-quotes__header .section__title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .custom-quotes__modal {
+        width: calc(100% - 32px);
+        max-height: 82dvh;
+        border-radius: 16px;
+    }
+
+    .custom-quotes {
+        padding: 16px;
+    }
+
+    .custom-quotes__header {
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .custom-quotes__header .section__title {
+        font-size: 1rem;
+        padding-bottom: 8px;
+    }
+
+    .custom-quotes__close {
+        width: 32px;
+        height: 32px;
+        font-size: 1.3rem;
+    }
+
+    .open-modal {
+        width: 100%;
+    }
+}
+
+@media (max-width: 360px) {
+    .custom-quotes {
+        padding: 12px;
+    }
+
+    .custom-quotes__header .section__title {
+        font-size: 0.9rem;
+    }
+}

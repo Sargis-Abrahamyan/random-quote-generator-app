@@ -1,0 +1,155 @@
+.quotes {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 350px;
+    padding-block: 16px;
+}
+
+.quote-card {
+    width: 100%;
+    height: 264px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.quote-card__content {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+    padding: 0 8px;
+    color: var(--text-color);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: -0.5px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.quote-card__author {
+    flex-shrink: 0;
+    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.quote-card__author.has-author {
+    border-top: 1px solid var(--accent);
+    padding-block: 12px;
+}
+
+.is-changing {
+    opacity: 0;
+    transform: translateY(12px);
+}
+
+.quotes__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    width: 100%;
+    margin-block: 24px;
+}
+
+.quotes__generate,
+.quotes__copy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 0 24px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.quotes__generate {
+    color: #fff;
+    background-color: var(--accent);
+}
+
+.quotes__generate:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.quotes__copy {
+    color: var(--text-color);
+    background-color: transparent;
+    border-color: var(--border);
+}
+
+.quotes__copy:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.quotes__generate:active,
+.quotes__copy:active {
+    transform: scale(0.97);
+}
+
+.quotes__generate:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.quotes__generate:focus-visible,
+.quotes__copy:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.quotes__copy svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 480px) {
+    .quotes {
+        min-height: 320px;
+        padding-block: 20px;
+    }
+
+    .quote-card {
+        height: 220px;
+        gap: 20px;
+    }
+
+    .quote-card__content {
+        font-size: 1.3rem;
+    }
+
+    .quotes__actions {
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+
+    .quotes__generate {
+        flex: 1;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .quotes {
+        padding-block: 28px;
+    }
+
+    .quote-card {
+        height: 240px;
+    }
+}

@@ -1,0 +1,23 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 16px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        gap: 24px;
+        padding: 24px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        gap: 30px;
+        padding: 30px;
+    }
+}
